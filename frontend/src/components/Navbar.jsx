@@ -40,18 +40,18 @@ const Navbar = () => {
       </nav>
 
       {open && (
-        <div className="md:hidden flex flex-col items-end gap-4 px-5 pb-5">
+        <div className="md:hidden  flex flex-col items-end gap-4 px-5 pb-5">
           <Link
             to="new"
             onClick={() => setOpen(false)}
-            className="font-bold text-lg"
+            className="font-bold text-lg  "
           >
             New Task
           </Link>
           <Link
             to="/my-task"
             onClick={() => setOpen(false)}
-            className="font-bold text-lg"
+            className="font-bold text-lg "
           >
             All Tasks
           </Link>

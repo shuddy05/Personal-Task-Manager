@@ -1,7 +1,35 @@
 import React from "react";
 import arrowBack from "../assets/Vector.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+
 const EditTask = () => {
+  const BASE_URL = "http://localhost:5010/api/task";
+  const [tasks, setTasks] = useState();
+  const navigate = useNavigate();
+
+  const handleEditTask = async (id, updates) => {
+    try {
+      const res = await fetch(`${BASE_URL}/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updates),
+      });
+      navigate("my-task");
+    } catch (error) {
+      console.error("Error updating task:", error);
+    }
+  };
+
+  const handleDeleteTask = async (id) => {
+    try {
+      await fetch(`${BASE_URL}/${id}`, { method: "DELETE" });
+      setTasks((prev) => prev.filter((task) => task.id !== id));
+    } catch (error) {
+      console.error("Error deleting task:", error);
+    }
+  };
+
   return (
     <div>
       <div className="layout">

@@ -40,3 +40,12 @@ export const getTasks = async (req, res) => {
     res.status(500).json({ message: error.mesage });
   }
 };
+
+export const getTaskById = async (req, res) => {
+  try {
+    const task = await Task.findById(req.params.id);
+    res.status(200).json();
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

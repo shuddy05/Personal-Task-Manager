@@ -15,9 +15,11 @@ const Navbar = () => {
           </h1>
         </div>
         <div className="flex items-center gap-2 md:gap-6">
-          <button className="cursor-pointer font-bold text-lg md:text-[22px]">
-            New Task
-          </button>
+          <Link to="new">
+            <button className="cursor-pointer font-bold text-lg md:text-[22px]">
+              New Task
+            </button>
+          </Link>
 
           <Link
             to="/my-task "

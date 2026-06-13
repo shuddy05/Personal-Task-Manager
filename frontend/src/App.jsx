@@ -14,7 +14,7 @@ function App() {
         <Route path="/" element={<CoverPage />} />
         <Route path="/my-task" element={<MyTask />} />
         <Route path="/new" element={<NewTask />} />
-        <Route path="/edit" element={<EditTask />} />
+        <Route path="/edit/:id" element={<EditTask />} />
       </Routes>
     </Router>
   );

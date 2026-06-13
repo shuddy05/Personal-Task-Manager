@@ -2,22 +2,34 @@ import React from "react";
 import edit from "../assets/clarity_note-edit-line.png";
 import delet from "../assets/fluent_delete-24-regular.png";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const MyTask = () => {
   const BASE_URL = "http://localhost:5010/api/task";
+  const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
     const fetchTasks = async () => {
       try {
         const res = await fetch(BASE_URL);
-        const data = res.json();
+        const data = await res.json();
         setTasks(data);
       } catch (error) {
         console.error("Error fetching tasks:", error);
       }
     };
+    fetchTasks();
   }, []);
+
+  const handleDeleteTask = async (id) => {
+    try {
+      const res = await fetch(`${BASE_URL}/${id}`, { method: "DELETE" });
+      if (!res.ok) throw new Error("Failed to delete");
+      setTasks((prev) => prev.filter((task) => task._id !== id));
+    } catch (error) {
+      console.error("Error deleting task:", error);
+    }
+  };
 
   return (
     <div>
@@ -31,35 +43,43 @@ const MyTask = () => {
             </button>
           </Link>
         </div>
-        <div className="w-full border border-[#B8B6B6] rounded-[10px] p-4 ">
-          <div className="flex justify-between border-b border-[#B8B6B6] mb-3 py-3  ">
-            <h1 className="text-[20px] md:text-[24px] text-[#F38383]">
-              Urgent
-            </h1>
-            <div className="flex gap-4 items-center">
-              <Link
-                to="/edit"
-                className="bg-[#974FD0] rounded-lg flex gap-2 items-center  py-1 px-2 md:py-2 md:px-3 text-white"
-              >
-                <img src={edit} alt="" className="w-full object-cover" />
-                Edit
-              </Link>
-              <button className=" text-[#974FD0] cursor-pointer border border-[#974FD0] rounded-lg flex gap-2 items-center  py-1 px-2 md:py-2 md:px-3 ">
-                <img src={delet} alt="" className="w-full object-cover" />
-                Delete
-              </button>
+        {tasks.map((task) => {
+          return (
+            <div
+              key={task._id}
+              className="w-full border border-[#B8B6B6] rounded-[10px] p-4 "
+            >
+              <div className="flex justify-between border-b border-[#B8B6B6] mb-3 py-3  ">
+                <h1 className="text-[20px] md:text-[24px] text-[#F38383]">
+                  {task.tags}
+                </h1>
+                <div className="flex gap-4 items-center">
+                  <Link
+                    to={`/edit/${task._id}`}
+                    className="bg-[#974FD0] rounded-lg flex gap-2 items-center  py-1 px-2 md:py-2 md:px-3 text-white"
+                  >
+                    <img src={edit} alt="" className="w-full object-cover" />
+                    Edit
+                  </Link>
+                  <button
+                    onClick={() => handleDeleteTask(task._id)}
+                    className=" text-[#974FD0] cursor-pointer border border-[#974FD0] rounded-lg flex gap-2 items-center  py-1 px-2 md:py-2 md:px-3 "
+                  >
+                    <img src={delet} alt="" className="w-full object-cover" />
+                    Delete
+                  </button>
+                </div>
+              </div>
+              <div>
+                <h1 className="text-xl md:text-4xl  "> {task.title} </h1>
+                <p className="text-lg md:text-[22px] text-[#737171] mt-2 ">
+                  {" "}
+                  {task.description}{" "}
+                </p>
+              </div>
             </div>
-          </div>
-          <div>
-            <h1 className="text-xl md:text-4xl  ">FinTech Website Update</h1>
-            <p className="text-lg md:text-[22px] text-[#737171] mt-2 ">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet quis
-              nibh posuere non tempor. Erat mattis gravida pulvinar nibh aliquam
-              faucibus et magna. Interdum eu tempus ultricies cras neque mi.
-              Eget tellus suspendisse et viverra.
-            </p>
-          </div>
-        </div>
+          );
+        })}
       </div>
     </div>
   );

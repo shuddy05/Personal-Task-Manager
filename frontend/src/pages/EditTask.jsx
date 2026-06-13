@@ -13,7 +13,7 @@ const taskSchema = yup.object().shape({
 });
 
 const EditTask = () => {
-  const BASE_URL = "http://localhost:5010/api/task";
+  const BASE_URL = "https://personal-task-manager-mlqm.onrender.com";
   const { id } = useParams();
 
   const navigate = useNavigate();

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const MyTask = () => {
-  const BASE_URL = "http://localhost:5010/api/task";
+  const BASE_URL = "https://personal-task-manager-mlqm.onrender.com";
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {

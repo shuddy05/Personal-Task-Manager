@@ -12,7 +12,8 @@ const taskSchema = yup.object().shape({
 });
 
 const NewTask = () => {
-  const BASE_URL = "https://personal-task-manager-mlqm.onrender.com";
+  const BASE_URL = "https://personal-task-manager-mlqm.onrender.com/api/task";
+
   const navigate = useNavigate();
 
   const {

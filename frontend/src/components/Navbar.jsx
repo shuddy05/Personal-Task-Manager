@@ -40,7 +40,7 @@ const Navbar = () => {
       </nav>
 
       {open && (
-        <div className="md:hidden flex flex-col items-start gap-4 px-5 pb-5">
+        <div className="md:hidden flex flex-col items-end gap-4 px-5 pb-5">
           <Link
             to="new"
             onClick={() => setOpen(false)}

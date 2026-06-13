@@ -81,7 +81,7 @@ const EditTask = () => {
             <label className="text-[#9C9C9C] text-lg md:text-2xl absolute left-10 top-[-15px] bg-white ">
               Description
             </label>
-            <input
+            <textarea
               type="text"
               {...register("description")}
               placeholder="Briefly describe your task"

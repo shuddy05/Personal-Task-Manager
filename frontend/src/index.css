@@ -1,0 +1,9 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300..700&display=swap");
+.layout {
+  @apply max-w-[1100px] mx-auto px-6 py-6;
+}
+
+* {
+  font-family: "Signika Negative", sans-serif;
+}
